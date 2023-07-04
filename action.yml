@@ -1,0 +1,23 @@
+name: 'GP Linter'
+author: 'Jose Sandoval'
+branding:
+  icon: 'check-circle'
+  color: 'green'
+description: "A Github Action to parse and validate your feature files (gherkin / cucumber)"
+inputs:
+  path: 
+   description: 'Specify path to folder where the feature files are located'
+   required: false
+   default: '.'
+  config_file:
+   description: 'Specify the Configuration file'
+   required: false
+   default: '/root/.gherkin-lintrc'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - gherkin-lint
+    - -c
+    - ${{ inputs.config_file }}
+    - ${{ inputs.path }}
